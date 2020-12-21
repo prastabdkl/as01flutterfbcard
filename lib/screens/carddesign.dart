@@ -13,18 +13,13 @@ class CardDesign extends StatefulWidget {
 class _CardDesignState extends State<CardDesign> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('my facebook card'),
-      // ),
-      body: _body(),
-    );
-  }
+    double cardHeight = MediaQuery.of(context).size.height;
+    double cardWidth = MediaQuery.of(context).size.width;
 
-  Widget _body() {
-    return Column(
-      // baccolor: Colors.blue,
-      children: [_mycard()],
+    return Container(
+      height: cardHeight * .8,
+      width: cardWidth,
+      child: _mycard(),
     );
   }
 
