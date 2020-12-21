@@ -5,29 +5,46 @@ import 'package:flutter/material.dart';
 // import 'package:flutter_signin_button/flutter_signin_button.dart';
 // import 'package:cupertino_icons/cupertino_icons.dart';
 
-class CardDesign extends StatefulWidget {
-  @override
-  _CardDesignState createState() => _CardDesignState();
-}
+// ignore: must_be_immutable
+class CardView extends StatelessWidget {
+  final String cardText;
+  final Image image;
+  double cardHeight;
+  double cardWidth;
+  final int likesCount;
+  final int commentsCount;
+  final int sharesCount;
 
-class _CardDesignState extends State<CardDesign> {
+  CardView({
+    @required this.cardText,
+    @required this.image,
+    @required this.likesCount,
+    @required this.commentsCount,
+    @required this.sharesCount,
+  });
+
   @override
   Widget build(BuildContext context) {
-    double cardHeight = MediaQuery.of(context).size.height;
-    double cardWidth = MediaQuery.of(context).size.width;
-
+    // double cardHeight = MediaQuery.of(context).size.height;
+    // double cardWidth = MediaQuery.of(context).size.width;
     return Container(
-      height: cardHeight * .8,
+      height: cardHeight,
       width: cardWidth,
-      child: _mycard(),
+      child: _mycard(
+          cardText, image, context, likesCount, commentsCount, sharesCount),
     );
   }
 
-  Widget _mycard() {
+  Widget _mycard(String cardtext, Image image, BuildContext context,
+      int likesCount, int commentsCount, int sharesCount) {
     return Card(
       child: Column(
         // mainAxisSize: MainAxisSize.min,
-        children: [_cardHeader(), _cardBody(), _cardFooter()],
+        children: [
+          _cardHeader(),
+          _cardBody(cardText, image, context),
+          _cardFooter(likesCount, commentsCount, sharesCount)
+        ],
       ),
     );
   }
@@ -122,54 +139,64 @@ class _CardDesignState extends State<CardDesign> {
     );
   }
 
-  Widget _cardBody() {
+  Widget _cardBody(String cardText, Image image, BuildContext context) {
     return Column(children: [
-      _bodytext(),
-      Container(
-          child: GestureDetector(
-        onTap: () {
-          print('on tap called');
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => DetailPage(),
-              ));
-        },
-        child: Image.network(
-            "https://clutchpoints.com/wp-content/uploads/2020/12/Warriors-news-Jeremy-Lin-returning-to-old-stomping-grounds-with-Golden-State-Thumbnail.jpg"),
-      ))
+      _bodytext(cardText),
+      Padding(
+        padding: const EdgeInsets.only(top: 15),
+        child: Container(
+            child: GestureDetector(
+          onTap: () {
+            print('on tap called');
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DetailPage(
+                    cardText: cardText,
+                    image: image,
+                  ),
+                ));
+          },
+          child: image,
+        )),
+      )
     ]);
   }
 
-  Widget _bodytext() {
-    return Padding(
-      padding: const EdgeInsets.all(15.0),
-      child: RichText(
-          text: TextSpan(
-              text: "Pamper your pooch ",
-              style: TextStyle(color: Colors.black),
-              children: [
-            TextSpan(
-                text: "The Bark Shoppe ", style: TextStyle(color: Colors.blue)),
-            TextSpan(
-                text:
-                    "is a pet care facility in New York ofering grooming products and makeovers with your pet's individual needs in mind Take a look and shop now",
-                style: TextStyle(color: Colors.black)),
-            TextSpan(
-                text: " #BuyBlack: ", style: TextStyle(color: Colors.blue)),
-            TextSpan(
-                text: " https://bit.ly/BarkShoppe ",
-                style: TextStyle(color: Colors.blue)),
-            TextSpan(
-                text: " #LiftBlackVoices ",
-                style: TextStyle(color: Colors.blue)),
-            TextSpan(
-                text: " #MoreTogether ", style: TextStyle(color: Colors.blue)),
-          ])),
-    );
+  Widget _bodytext(String cardText) {
+    if (cardText != null)
+      return Text(cardText);
+    else
+      return Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: RichText(
+            text: TextSpan(
+                text: "Pamper your pooch ",
+                style: TextStyle(color: Colors.black),
+                children: [
+              TextSpan(
+                  text: "The Bark Shoppe ",
+                  style: TextStyle(color: Colors.blue)),
+              TextSpan(
+                  text:
+                      "is a pet care facility in New York ofering grooming products and makeovers with your pet's individual needs in mind Take a look and shop now",
+                  style: TextStyle(color: Colors.black)),
+              TextSpan(
+                  text: " #BuyBlack: ", style: TextStyle(color: Colors.blue)),
+              TextSpan(
+                  text: " https://bit.ly/BarkShoppe ",
+                  style: TextStyle(color: Colors.blue)),
+              TextSpan(
+                  text: " #LiftBlackVoices ",
+                  style: TextStyle(color: Colors.blue)),
+              TextSpan(
+                  text: " #MoreTogether ",
+                  style: TextStyle(color: Colors.blue)),
+            ])),
+      );
   }
 
-  Widget _cardFooter() {
+  Widget _cardFooter(int likesCount, int commentsCount, int sharesCount) {
     return Column(
       children: [
         Padding(
@@ -203,7 +230,7 @@ class _CardDesignState extends State<CardDesign> {
                               size: 15,
                               color: Colors.white,
                             )),
-                        Text(" 5.3K"),
+                        Text(likesCount.toString()),
                       ],
                     )
                   ],
@@ -217,7 +244,7 @@ class _CardDesignState extends State<CardDesign> {
                   // crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Column(
-                      children: [Text("525 Comments ")],
+                      children: [Text(commentsCount.toString() + " Comments ")],
                     ),
                     Column(
                       children: [
@@ -225,7 +252,7 @@ class _CardDesignState extends State<CardDesign> {
                       ],
                     ),
                     Column(
-                      children: [Text(" 187 Shares")],
+                      children: [Text(sharesCount.toString() + " Shares")],
                     ),
                   ],
                 ),
