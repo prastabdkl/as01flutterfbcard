@@ -18,9 +18,9 @@ in listview.
 • To make different colored text in single line you can use RichText() widget.
 
 ![alt text](https://i.imgur.com/SAGofUt.png)
-![alt text](https://imgur.com/dckzGby)
-![alt text](https://imgur.com/gU5sZYI)
-![alt text](https://imgur.com/AE4Kq56)
-![alt text](https://imgur.com/LUVRLwk)
-![alt text](https://imgur.com/rcMEqqL)
-![alt text](https://imgur.com/3kYOJVI)
+![alt text](https://i.imgur.com/dckzGby.png)
+![alt text](https://i.imgur.com/gU5sZYI.png)
+![alt text](https://i.imgur.com/AE4Kq56.png)
+![alt text](https://i.imgur.com/LUVRLwk.png)
+![alt text](https://i.imgur.com/rcMEqqL.png)
+![alt text](https://i.imgur.com/3kYOJVI.png)
